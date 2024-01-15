@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 require __DIR__ . "/../../vendor/autoload.php";
 
-use Framework\App;
+use Framework\app;
+use App\Controllers\HomeController;
 
-$App = new App();
+$app = new app();
 
-return $App;
+$app->get('/', [HomeController::class, 'home']);
+
+return $app;
