@@ -8,11 +8,25 @@ use Framework\Contracts\MiddlewareInterface;
 use Framework\Exceptions\ValidationException;
 
 class ValidationExceptionMiddleware implements MiddlewareInterface {
+    public function __construct() {
+    }
+
     public function process(callable $next) {
         try {
             $next();
-        } catch (ValidationException $errors) {
-            redirectTo("/register");
+        } catch (ValidationException $error) {
+            $oldFormData = $_POST;
+            $excludedFields = ['password,, confirmPassword'];
+            $formattedFormData = array_diff_key(
+                $oldFormData,
+                array_flip($excludedFields)
+            );
+
+            $_SESSION['errors'] = $error->errors;
+            $_SESSION['oldFormData'] = $formattedFormData;
+
+            $referer = $_SERVER['HTTP_REFERER'];
+            redirectTo($referer);
         }
     }
 }
