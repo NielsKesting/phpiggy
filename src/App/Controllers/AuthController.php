@@ -9,10 +9,13 @@ use App\Services\ValidatorService;
 
 class AuthController {
     public function __construct(private TemplateEngine $view, private ValidatorService $validatorService) {
+    }
+
+    public function registerView() {
         echo $this->view->render("register.php");
     }
 
     public function register() {
-        dumpAndDie($_POST);
+        $this->validatorService->validateRegister($_POST);
     }
 }
