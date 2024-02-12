@@ -6,12 +6,12 @@ namespace Framework\Rules;
 
 use Framework\Contracts\RuleInterface;
 
-class RequiredRule implements RuleInterface {
+class ValidRule implements RuleInterface {
     public function validate(array $data, string $field, array $params): bool {
-        return !empty($data[$field]);
+        return in_array($data[$field], $params);
     }
 
     public function getMessage(array $data, string $field, array $params): string {
-        return "This field is required.";
+        return "Invalid selection.";
     }
 }
