@@ -9,5 +9,5 @@ use App\Middleware\{TemplateDataMiddleware, ValidationExceptionMiddleware};
 
 function registerMiddleware(App $app) {
     $app->addMiddleware(TemplateDataMiddleware::class);
-    // $app->addMiddleware(ValidationExceptionMiddleware::class);
+    $app->addMiddleware(ValidationExceptionMiddleware::class);
 }
