@@ -16,7 +16,7 @@ class ValidationExceptionMiddleware implements MiddlewareInterface {
             $next();
         } catch (ValidationException $error) {
             $oldFormData = $_POST;
-            $excludedFields = ['password,, confirmPassword'];
+            $excludedFields = ['password', 'confirmPassword'];
             $formattedFormData = array_diff_key(
                 $oldFormData,
                 array_flip($excludedFields)
