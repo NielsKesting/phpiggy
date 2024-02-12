@@ -8,7 +8,7 @@ use Framework\TemplateEngine;
 use App\Services\{ValidatorService, UserService};
 
 class AuthController {
-    public function __construct(private TemplateEngine $view, private ValidatorService $validatorService, UserService $userService) {
+    public function __construct(private TemplateEngine $view, private ValidatorService $validatorService, private UserService $userService) {
     }
 
     public function registerView() {
@@ -17,5 +17,11 @@ class AuthController {
 
     public function register() {
         $this->validatorService->validateRegister($_POST);
+
+        $this->userService->isEmailTaken($_POST['email']);
+
+        $this->userService->create($_POST);
+
+        redirectTo('/');
     }
 }
