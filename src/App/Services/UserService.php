@@ -36,6 +36,10 @@ class UserService {
                 'url' => $formData['socialMediaUrl']
             ]
         );
+
+        session_regenerate_id();
+
+        $_SESSION['user'] = $this->database->id();
     }
 
     public function login(array $formData) {
