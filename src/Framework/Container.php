@@ -19,12 +19,14 @@ class Container {
         $reflectionClass = new ReflectionClass($className);
 
         if (!$reflectionClass->isInstantiable()) {
-            throw new ContainerException("Class {$className}");
+            var_dump('werkt');
+            throw new ContainerException("Class {$className} is not instantiable");
         }
 
         $constructor = $reflectionClass->getConstructor();
 
         if (!$constructor) {
+            return new $className;
         }
 
         $params = $constructor->getParameters();
