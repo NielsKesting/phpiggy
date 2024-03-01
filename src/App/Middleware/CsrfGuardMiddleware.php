@@ -20,7 +20,7 @@ class CsrfGuardMiddleware implements MiddlewareInterface {
             redirectTo('/');
         }
 
-        unset($_session['token']);
+        unset($_SESSION['token']);
 
         $next();
     }
